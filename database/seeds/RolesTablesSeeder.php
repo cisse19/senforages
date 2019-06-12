@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\Helpers\UuidForKey;
+
 
 class RolesTableSeeder extends Seeder
 {

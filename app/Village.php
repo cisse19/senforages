@@ -29,7 +29,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Village extends Eloquent
 {
 	use \Illuminate\Database\Eloquent\SoftDeletes;
-
+	use \App\Helpers\UuidForKey;
+	
 	protected $casts = [
 		'chef_id' => 'int',
 		'communes_id' => 'int'
