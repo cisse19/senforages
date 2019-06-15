@@ -11,13 +11,17 @@
 |
 */
 
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
-
 Route::get('/', function () {
-    return view('layout.default');
+    return view('welcome');
+});
+
+Route::get('/test', function () {
+    return view('layout.form');
 });
 Route::get('/test1', function () {
     return "HELLO";
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('villages', 'VillageController');

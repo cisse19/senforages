@@ -1,5 +1,7 @@
 <?php
+
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Default Configurations
@@ -9,7 +11,9 @@ return [
     | that will be generated from any database.
     |
     */
+
     '*' => [
+
         /*
         |--------------------------------------------------------------------------
         | Model Files Location
@@ -20,7 +24,9 @@ return [
         | be placed within a Base directory inside this location.
         |
         */
+
         'path' => app_path(),
+
         /*
         |--------------------------------------------------------------------------
         | Model Namespace
@@ -31,7 +37,9 @@ return [
         | similar to the path of your models defined above.
         |
         */
+
         'namespace' => 'App',
+
         /*
         |--------------------------------------------------------------------------
         | Parent Class
@@ -43,7 +51,9 @@ return [
         | will allow you to create custom database castings.
         |
         */
+
         'parent' => Illuminate\Database\Eloquent\Model::class,
+
         /*
         |--------------------------------------------------------------------------
         | Traits
@@ -56,10 +66,12 @@ return [
         | an example of how you can customize your models.
         |
         */
+
         'use' => [
             // Reliese\Database\Eloquent\BitBooleans::class,
             // Reliese\Database\Eloquent\BlamableBehavior::class,
         ],
+
         /*
         |--------------------------------------------------------------------------
         | Model Connection
@@ -70,7 +82,9 @@ return [
         | models will have the connection property filled.
         |
         */
+
         'connection' => false,
+
         /*
         |--------------------------------------------------------------------------
         | Timestamps
@@ -84,7 +98,9 @@ return [
         | disabled for your model.
         |
         */
+
         'timestamps' => true,
+
         // 'timestamps' => [
         //     'enabled' => true,
         //     'fields' => [
@@ -92,6 +108,7 @@ return [
         //         'UPDATED_AT' => 'updated_at',
         //     ]
         // ],
+
         /*
         |--------------------------------------------------------------------------
         | Soft Deletes
@@ -105,11 +122,14 @@ return [
         | disabled for your model.
         |
         */
+
         'soft_deletes' => true,
+
         // 'soft_deletes' => [
         //     'enabled' => true,
         //     'field' => 'deleted_at',
         // ],
+
         /*
         |--------------------------------------------------------------------------
         | Date Format
@@ -120,7 +140,9 @@ return [
         | models unless you change it to a more convenient value.
         |
         */
+
         'date_format' => 'Y-m-d H:i:s',
+
         /*
         |--------------------------------------------------------------------------
         | Pagination
@@ -131,7 +153,9 @@ return [
         | see this number in your models unless you change it.
         |
         */
+
         'per_page' => 15,
+
         /*
         |--------------------------------------------------------------------------
         | Base Files
@@ -145,7 +169,9 @@ return [
         | you generate them, but your customized files will not be touched.
         |
         */
+
         'base_files' => false,
+
         /*
         |--------------------------------------------------------------------------
         | Snake Attributes
@@ -156,18 +182,9 @@ return [
         | that behaviour and use camel case attributes in your models.
         |
         */
+
         'snake_attributes' => true,
-        /*
-        |--------------------------------------------------------------------------
-        | Indent options
-        |--------------------------------------------------------------------------
-        |
-        | As default indention is done with tabs, but you can change it by setting
-        | this to the amount of spaces you that you want to use for indentation.
-        | Usually you will use 4 spaces instead of tabs.
-        |
-        */
-        'indent_with_space' => 0,
+
         /*
         |--------------------------------------------------------------------------
         | Qualified Table Names
@@ -177,13 +194,10 @@ return [
         | MySQL), you can make sure your models take into account their
         | respective database schema.
         |
-        | Can Either be NULL, FALSE or TRUE
-        | TRUE: Schema name will be prepended on the table
-        | FALSE:Table name will be set without schema name.
-        | NULL: Table name will follow laravel pattern,
-        |   i.e if class name(plural) matches table name, then table name will not be added
         */
+
         'qualified_tables' => false,
+
         /*
         |--------------------------------------------------------------------------
         | Hidden Attributes
@@ -195,9 +209,11 @@ return [
         | Some fields were defined for you.
         |
         */
+
         'hidden' => [
             '*secret*', '*password', '*token',
         ],
+
         /*
         |--------------------------------------------------------------------------
         | Mass Assignment Guarded Attributes
@@ -209,9 +225,11 @@ return [
         | excluding your models' primary keys.
         |
         */
+
         'guarded' => [
             // 'created_by', 'updated_by'
         ],
+
         /*
         |--------------------------------------------------------------------------
         | Casts
@@ -226,9 +244,11 @@ return [
         | modify them to fit your needs.
         |
         */
+
         'casts' => [
             '*_json' => 'json',
         ],
+
         /*
         |--------------------------------------------------------------------------
         | Excluded Tables
@@ -240,104 +260,13 @@ return [
         | filled for you, since you may not want a model for it.
         |
         */
+
         'except' => [
             'migrations',
             'password_resets',
         ],
-        /*
-        |--------------------------------------------------------------------------
-        | Specified Tables
-        |--------------------------------------------------------------------------
-        |
-        | You can specify specific tables. This will generate the models only
-        | for selected tables, ignoring the rest.
-        |
-        */
-        'only' => [
-            // 'users',
-        ],
-        /*
-        |--------------------------------------------------------------------------
-        | Table Prefix
-        |--------------------------------------------------------------------------
-        |
-        | If you have a prefix on your table names but don't want it in the model
-        | and relation names, specify it here.
-        |
-        */
-        'table_prefix' => '',
-        /*
-        |--------------------------------------------------------------------------
-        | Lower table name before doing studly
-        |--------------------------------------------------------------------------
-        |
-        | If tables names are capitalised using studly produces incorrect name
-        | this can help fix it ie TABLE_NAME now becomes TableName
-        |
-        */
-        'lower_table_name_first' => false,
-        /*
-        |--------------------------------------------------------------------------
-        | Relation Name Strategy
-        |--------------------------------------------------------------------------
-        |
-        | How the relations should be named in your models.
-        |
-        | 'related'     Use the related table as the relation name.
-        |               (post.author --> user.id)
-                            generates Post::user() and User::posts()
-        |
-        | 'foreign_key' Use the foreign key as the relation name.
-        |                   (post.author --> user.id)
-        |                       generates Post::author() and User::posts_author()
-        |               Column id's are ignored.
-        |                   (post.author_id --> user.id)
-        |                       generates the same as above.
-        |               When the foreign key is redundant, it is omited.
-        |                   (post.user_id --> user.id)
-        |                       generates User::posts() and not User::posts_user()
-        */
-        'relation_name_strategy' => 'related',
-        // 'relation_name_strategy' => 'foreign_key',
-        /*
-         |--------------------------------------------------------------------------
-         | Determines need or not to generate constants with properties names like
-         |
-         | ...
-         | const AGE = 'age';
-         | const USER_NAME = 'user_name';
-         | ...
-         |
-         | that later can be used in QueryBuilder like
-         |
-         | ...
-         | $builder->select([User::USER_NAME])->where(User::AGE, '<=', 18);
-         | ...
-         |
-         | that helps to avoid typos in strings when typing field names and allows to use
-         | code competition with available model's field names.
-         */
-        'with_property_constants' => false,
-        /*
-        |--------------------------------------------------------------------------
-        | Disable Pluralization Name
-        |--------------------------------------------------------------------------
-        |
-        | You can disable pluralization tables and relations
-        |
-        */
-        'pluralize' => true,
-        /*
-        |--------------------------------------------------------------------------
-        | Disable Pluralization Except For Certain Tables
-        |--------------------------------------------------------------------------
-        |
-        | You can enable pluralization for certain tables
-        |
-        */
-        'override_pluralize_for' => [
-        ],
     ],
+
     /*
     |--------------------------------------------------------------------------
     | Database Specifics
@@ -349,6 +278,7 @@ return [
     | These values will override those defined in the section above.
     |
     */
+
     // 'shop' => [
     //     'path' => app_path(),
     //     'namespace' => 'App',
@@ -358,7 +288,6 @@ return [
     //         Reliese\Database\Eloquent\BitBooleans::class,
     //     ],
     //     'except' => ['migrations'],
-    //     'only' => ['users'],
     //      // Table Specifics Bellow:
     //     'user' => [
     //      // Don't use any default trait

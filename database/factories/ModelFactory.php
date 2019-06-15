@@ -25,20 +25,10 @@ $factory->define(App\Type::class, function (Faker\Generator $faker) {
 //         },
 //     ];
 // });
-$factory->define(App\Agent::class, function (Faker\Generator $faker) {
-    $role_id=App\Role::where('name','Agent')->first()->id;
-    return [
-        'matricule' => "GEST".$faker->word,
-        'users_id' => function () use($role_id) {
-             return factory(App\User::class)->create(["roles_id"=>$role_id])->id;
-        },
-    ];
-});
-
 $factory->define(App\Gestionnaire::class, function (Faker\Generator $faker) {
     $role_id=App\Role::where('name','Gestionnaire')->first()->id;
     return [
-        'matricule' => "AGTS".$faker->word,
+        'matricule' => "GEST".$faker->word,
         'users_id' => function () use($role_id) {
              return factory(App\User::class)->create(["roles_id"=>$role_id])->id;
         },
@@ -89,28 +79,19 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
     ];
 });
 
-// $factory->define(App\Administrateur::class, function (Faker\Generator $faker) {
-//     return [
-//         'uuid' => $faker->uuid,
-//         'matricule' => $faker->word,
-//         'users_id' => function () {
-//              return factory(App\User::class)->create()->id;
-//         },
-//     ];
-// });
 $factory->define(App\Administrateur::class, function (Faker\Generator $faker) {
-    $role_id=App\Role::where('name','Administrateur')->first()->id;
     return [
-        'matricule' => "ADMIN".$faker->word,
-        'users_id' => function () use($role_id) {
-             return factory(App\User::class)->create(["roles_id"=>$role_id])->id;
+        'uuid' => $faker->uuid,
+        'matricule' => $faker->word,
+        'users_id' => function () {
+             return factory(App\User::class)->create()->id;
         },
     ];
 });
 
 $factory->define(App\Role::class, function (Faker\Generator $faker) {
     return [
-      //  'uuid' => $faker->uuid,
+        'uuid' => $faker->uuid,
         'name' => $faker->name,
     ];
 });
@@ -135,39 +116,30 @@ $factory->define(App\Commune::class, function (Faker\Generator $faker) {
     ];
 });
 
-// $factory->define(App\Comptable::class, function (Faker\Generator $faker) {
-//     return [
-//         'uuid' => $faker->uuid,
-//         'matricule' => $faker->word,
-//         'users_id' => function () {
-//              return factory(App\User::class)->create()->id;
-//         },
-//     ];
-// });
 $factory->define(App\Comptable::class, function (Faker\Generator $faker) {
-    $role_id=App\Role::where('name','Comptable')->first()->id;
     return [
-        'matricule' => "CMPT".$faker->word,
-        'users_id' => function () use($role_id) {
-             return factory(App\User::class)->create(["roles_id"=>$role_id])->id;
+        'uuid' => $faker->uuid,
+        'matricule' => $faker->word,
+        'users_id' => function () {
+             return factory(App\User::class)->create()->id;
         },
     ];
 });
 
-/* $factory->define(App\User::class, function (Faker\Generator $faker) {
-    return [
-        //'uuid' => $faker->uuid,
-        'firstname' => $faker->firstName,
-        'name' => $faker->name,
-        'telephone' => $faker->word,
-        'email' => $faker->safeEmail,
-        'email_verified_at' => $faker->dateTimeBetween(),
-        'password' => bcrypt($faker->password),
-         'roles_id' => function () {
-              return factory(App\Role::class)->create()->id;
-         },
-     ];
-}); */
+// $factory->define(App\User::class, function (Faker\Generator $faker) {
+//     return [
+//         'uuid' => $faker->uuid,
+//         'firstname' => $faker->firstName,
+//         'name' => $faker->name,
+//         'telephone' => $faker->word,
+//         'email' => $faker->safeEmail,
+//         'email_verified_at' => $faker->dateTimeBetween(),
+//         'password' => bcrypt($faker->password),
+//         'roles_id' => function () {
+//              return factory(App\Role::class)->create()->id;
+//         },
+//     ];
+// });
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'firstname' => SnmG::getFirstName(),
@@ -197,15 +169,26 @@ $factory->define(App\Reglement::class, function (Faker\Generator $faker) {
     ];
 });
 
-/* $factory->define(App\Agent::class, function (Faker\Generator $faker) {
+// $factory->define(App\Agent::class, function (Faker\Generator $faker) {
+//     return [
+//         'uuid' => $faker->uuid,
+//         'matricule' => $faker->word,
+//         'users_id' => function () {
+//              return factory(App\User::class)->create()->id;
+//         },
+//     ];
+// });
+
+
+$factory->define(App\Agent::class, function (Faker\Generator $faker) {
+    $role_id=App\Role::where('name','Agent')->first()->id;
     return [
-      'uuid' => $faker->uuid,
-        'matricule' => $faker->word,
-        'users_id' => function () {
-             return factory(App\User::class)->create()->id;
+        'matricule' => "AGT".$faker->word,
+        'users_id' => function () use($role_id) {
+             return factory(App\User::class)->create(["roles_id"=>$role_id])->id;
         },
     ];
-}); */
+});
 
 $factory->define(App\Facture::class, function (Faker\Generator $faker) {
     return [
@@ -228,21 +211,6 @@ $factory->define(App\Compteur::class, function (Faker\Generator $faker) {
     ];
 });
 
-/* $factory->define(App\Abonnement::class, function (Faker\Generator $faker) {
-    return [
-        'uuid' => $faker->uuid,
-        'details' => $faker->word,
-        'clients_id' => function () {
-             return factory(App\Client::class)->create()->id;
-        },
-        'compteurs_id' => function () {
-             return factory(App\Compteur::class)->create()->id;
-        },
-    ];
-}); */
-
-
-
 $factory->define(App\Abonnement::class, function (Faker\Generator $faker) {
     return [
         'uuid' => $faker->uuid,
@@ -255,7 +223,6 @@ $factory->define(App\Abonnement::class, function (Faker\Generator $faker) {
         },
     ];
 });
-
 
 $factory->define(App\Arrondissement::class, function (Faker\Generator $faker) {
     return [
