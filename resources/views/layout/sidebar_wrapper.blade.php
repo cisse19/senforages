@@ -49,7 +49,7 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="./map.html">
+      <a class="nav-link" href="{{route('compteurs.index')}}">
         <i class="material-icons">location_ons</i>
         <p>Compteurs</p>
       </a>
