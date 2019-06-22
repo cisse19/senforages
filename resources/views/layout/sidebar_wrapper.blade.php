@@ -37,13 +37,13 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="./typography.html">
+      <a class="nav-link" href="{{route('gestionnaires.index')}}">
         <i class="material-icons">library_books</i>
         <p>Gestionnaires</p>
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="./icons.html">
+      <a class="nav-link" href="{{route('abonnements.index')}}">
         <i class="material-icons">bubble_chart</i>
         <p>Abonnements</p>
       </a>

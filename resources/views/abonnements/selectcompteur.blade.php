@@ -9,8 +9,8 @@
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">SENFORAGE</h4>
-                  <p class="card-category"> Clients
-                      <a href="{{route('clients.selectvillage')}}"><div class="btn btn-warning">Nouveau Client <i class="material-icons">add</i></div></a> 
+                  <p class="card-category"> Selection du compteur pour le client
+                      {{-- <a href="{{route('abonnements.selectclient')}}"><div class="btn btn-warning">Selection du Client <i class="material-icons">add</i></div></a>  --}}
                   </p>
                 </div>
                 <div class="card-body">
@@ -21,13 +21,13 @@
                           ID
                         </th>
                         <th>
-                          Nom
+                          UUID
                         </th>
                         <th>
-                            Prenom
+                            NSERIE
                         </th>
                         <th>
-                          Email
+                          Date Creation
                         </th>
                         <th>
                           Action
@@ -49,31 +49,6 @@
           </div>
         </div>
       </div>
-        {{-- modale pour supprimer client --}}
-
-      <div class="modal" id="modal_delete_client" tabindex="-1" role="dialog">
-      <form method="POST" action="" id="form-delete-client">
-        @csrf
-        @method('DELETE')
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </form>
-      </div>
       @endsection
 
       @push('scripts')
@@ -82,12 +57,12 @@
           $('#table-clients').DataTable( { 
             "processing": true,
             "serverSide": true,
-            "ajax": "{{route('clients.list')}}",
+            "ajax": "{{route('compteurs.listfree')}}",
             columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'user.name', name: 'user.name' },
-                    { data: 'user.firstname', name: 'user.firstname' },
-                    { data: 'user.email', name: 'user.email' },
+                    { data: 'uuid', name: 'uuid' },
+                    { data: 'numero_serie', name: 'numero_serie' },
+                    { data: 'created_at', name: 'created_at' },
                     { data: null ,orderable: false, searchable: false}
 
                 ],
@@ -95,11 +70,8 @@
                         {
                         "data": null,
                         "render": function (data, type, row) {
-                        url_e =  "{!! route('clients.edit',':id')!!}".replace(':id', data.id);
-                        url_d =  "{!! route('clients.destroy',':id')!!}".replace(':id', data.id);
-                        return '<a href='+url_e+'  class=" btn btn-primary " ><i class="material-icons">edit</i></a>'+
-                        '<div class="btn btn-danger delete btn_delete_client" data-href='+url_d+'><i class="material-icons">delete</i></div>';
-                        },
+                        url_e =  "{!! route('abonnements.create',['compteur'=>'id-cptr','client'=>'idc'])!!}".replace('id-cptr', data.id).replace('idc',{{$client->id}});
+                        return '<a href='+url_e+'  class=" btn btn-primary " ><i class="material-icons">edit</i></a>';                        },
                         "targets": 4
                         },
                     // {
@@ -112,13 +84,7 @@
                     // }
                 ],
               
-          }); 
-
-            $('#table-clients').off('click', '.btn_delete_client').on('click', '.btn_delete_client', 
-            function(){
-            $('#modal_delete_client').modal();
-            var href=$(this).data('href');   
-            });
+          });
       });
       </script>
 
