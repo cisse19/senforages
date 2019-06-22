@@ -106,5 +106,11 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         //
+        $client->delete();
+        $message = $client->user->firstname.' '.$client->user->name.' a été supprimé(e)';
+        return redirect()->route('clients.index')->with(compact('message'));
+
+        
     }
+
 }

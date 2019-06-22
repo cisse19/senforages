@@ -6,6 +6,12 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
+                @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+@endif
+
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">SENFORAGE</h4>
@@ -51,29 +57,30 @@
       </div>
         {{-- modale pour supprimer client --}}
 
-      <div class="modal" id="modal_delete_client" tabindex="-1" role="dialog">
-      <form method="POST" action="" id="form-delete-client">
-        @csrf
-        @method('DELETE')
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <div class="modal fade" id="modal_delete_client" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <form method="POST" action="" id="form-delete-client">
+              {{ csrf_field() }}
+            @method('DELETE')
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title" id="exampleModalLabel">Êtes-vous sûr de bien vouloir supprimer ce client ?</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  cliquez sur close pour annuler
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-danger"><i class="fas fa-times">&nbsp;Supprimer</i></button>
+                </div>
+              </div>
             </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </form>
-      </div>
+          </form>
+         </div>
+         
       @endsection
 
       @push('scripts')
@@ -114,11 +121,13 @@
               
           }); 
 
-            $('#table-clients').off('click', '.btn_delete_client').on('click', '.btn_delete_client', 
-            function(){
-            $('#modal_delete_client').modal();
-            var href=$(this).data('href');   
-            });
+          $('#table-clients').off('click', '.btn_delete_client').on('click', '.btn_delete_client',
+       function() {
+         var href=$(this).data('href');
+         $('#form-delete-client').attr('action', href);
+         $('#modal_delete_client').modal();
+       });
+
       });
       </script>
 

@@ -61,17 +61,17 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="./rtl.html">
+      <a class="nav-link" href="{{route('consommations.index')}}">
         <i class="material-icons">language</i>
-        <p>RTL Support</p>
+        <p>Consommations</p>
       </a>
     </li>
-    <li class="nav-item active-pro ">
+    {{-- <li class="nav-item active-pro ">
       <a class="nav-link" href="./upgrade.html">
         <i class="material-icons">unarchive</i>
         <p>Upgrade to PRO</p>
       </a>
-    </li>
+    </li> --}}
   </ul>
 </div>
 {{-- <div class="sidebar-wrapper">
