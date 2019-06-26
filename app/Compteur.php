@@ -54,4 +54,32 @@ class Compteur extends Eloquent
 	{
 		return $this->hasMany(\App\Consommation::class, 'compteurs_id');
 	}
+	public function getNewConsommationsAttribute()
+	{
+		return $this->consommations->where('facture','=',null);
+	}
+	public function generateFacture()
+	{
+		$nouvelles_conso= $this->getNewconsommationsAttribute();
+		if ($nouvelles_conso->count() >0){
+			// creer une facture
+			$facture=new \App\Facture;
+			// affectation des conso
+			$facture->details="generee auto..";
+			// calcul du montant total
+			$facture->save();
+			// calcul de la valeur totale
+			$valeur=0;
+			foreach ($nouvelles_conso as $conso){
+			$valeur+=$conso->valeur;
+		}
+		$facture->valeur_totale_cosommee=$valeur;
+		$facture->montant=$valeur*3;
+		$facture->save();
+		$facture->consommations()->saveMany($nouvelles_conso);
+		return $facture;
+	}
+	return null;
+ }	
 }
+
