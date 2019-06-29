@@ -40,6 +40,10 @@ Route::get('/clients/selectvillage', function () {
     return view('consommations.create');
  })->name('consommations.create');
 
+ Route::get('/factures-show', function () {
+    return view('factures.show');
+ });
+
  use Carbon\Carbon;
 
  Route::get('carbon', function () {
@@ -49,7 +53,9 @@ Route::get('/clients/selectvillage', function () {
     dump($date);
 });
 
-
+Route::get('/accueils/index', function () {
+    return view('accueils.index');
+ })->name('accueils.index');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -66,7 +72,8 @@ Route::get('/gestionnaires/list', 'GestionnaireController@list')->name('gestionn
 Route::get('/administrateurs/list', 'AdministrateurController@list')->name('administrateurs.list');
 Route::get('/consommations/list', 'ConsommationController@list')->name('consommations.list');
 Route::get('/consommations/list/{abonnement?}','ConsommationController@list')->name('consommations.list');
-
+Route::get('/factures/list/{consommation?}','FactureController@list')->name('factures.list');
+Route::get('/reglements/create/{facture?}','ReglementController@create')->name('reglements.create');
 
 
 Route::resource('villages', 'VillageController');
@@ -78,6 +85,8 @@ Route::resource('comptables', 'ComptableController');
 Route::resource('gestionnaires', 'GestionnaireController');
 Route::resource('administrateurs', 'AdministrateurController');
 Route::resource('consommations', 'ConsommationController');
+Route::resource('factures', 'FactureController');
+Route::resource('reglements', 'ReglementController')->except('create');
 
 
 

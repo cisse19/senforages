@@ -1,8 +1,8 @@
 <div class="sidebar-wrapper">
   <ul class="nav">
     <li class="nav-item active  ">
-      <a class="nav-link" href="./dashboard.html">
-        <i class="material-icons">dashboard</i>
+      <a class="nav-link" href="{{route('accueils.index')}}">
+        <i class="material-icons">lock</i>
         <p>HOME</p>
       </a>
     </li>
@@ -55,7 +55,7 @@
       </a>
     </li>
     <li class="nav-item ">
-      <a class="nav-link" href="./notifications.html">
+      <a class="nav-link" href="{{route('factures.index')}}">
         <i class="material-icons">notifications</i>
         <p>Facturation</p>
       </a>
